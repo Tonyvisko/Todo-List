@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        index: true,//dung index = true de chi moi trang nay no ke thua cha
         element: <TodoApp />
       },
       {
