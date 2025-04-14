@@ -9,6 +9,7 @@ import LoginPage from './pages/login.jsx';
 import RegisterPage from './pages/register.jsx';
 import BookPage from './pages/book.jsx';
 import UserPage from './pages/users.jsx';
+import Mine from './pages/mine.jsx';
 import './styles/global.css'
 import ErrorPage from './pages/error.jsx';
 import TodoApp from './components/todo/TodoApp.jsx';
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
       {
         path: "/books",
         element: <BookPage />
+      },
+
+      {
+        path: "/mine",
+        element: <Mine />
       }
     ]
   },
