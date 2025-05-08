@@ -65,7 +65,7 @@ const UserForm = () => {
                         type="primary"> Create User</Button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 export default UserForm;
