@@ -1,4 +1,6 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Space, Table, Tag } from 'antd';
+import UpdateUserModal from './update.user.modal';
 
 
 const UserTable = (props) => {
@@ -18,7 +20,17 @@ const UserTable = (props) => {
             title: 'Email',
             dataIndex: 'email',
 
-        }
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <div style={{ display: "flex", gap: "20px" }}>
+                    <EditOutlined style={{ cursor: "pointer", color: "blue" }} />
+                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                </div>
+            ),
+        },
 
     ];
     //     {
@@ -48,10 +60,14 @@ const UserTable = (props) => {
 
     console.log(">>> run 000")
     return (
-        <Table columns={columns}
-            dataSource={dataUsers}
-            rowKey={"_id"}
-        />
+        <>
+            <Table columns={columns}
+                dataSource={dataUsers}
+                rowKey={"_id"}
+            />
+            <UpdateUserModal />
+        </>
+
     )
 }
 
