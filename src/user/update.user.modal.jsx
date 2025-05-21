@@ -1,21 +1,31 @@
 import { Button, Input, notification, Select, Space, Modal } from 'antd';
 import { useEffect, useState } from 'react';
-import { createUserAPI } from '../services/api.service';
+import { createUserAPI, updateUserAPI } from '../services/api.service';
 const UpdateUserModal = (props) => {
     const [id, setId] = useState("");
     const [fullName, setFullName] = useState("");
     const [phone, setPhone] = useState("");
-    const { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate } = props;
+    const { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate, loadUser } = props;
+
+
+    useEffect(() => {
+        console.log("check dataUpdate props", dataUpdate)
+        if (dataUpdate) {
+            setId(dataUpdate._id);
+            setFullName(dataUpdate.fullName);
+            setPhone(dataUpdate.phone);
+        }
+    }, [dataUpdate])
 
     const handleSubmitBtn = async () => {
-        const res = await createUserAPI(fullName, email, password, phone)
+        const res = await updateUserAPI(id, fullName, phone)
         if (res.data) {
             notification.success({
-                message: "Create user",
-                description: "Tạo mới user thành công"
+                message: "Update user",
+                description: "Cập nhật thành công"
             })
             resetAnhCloseModal();
-            // await loadUser();
+            await loadUser();
         } else {
             notification.error({
                 message: "Error create user",
@@ -26,14 +36,7 @@ const UpdateUserModal = (props) => {
         console.log(">>> check state: ", res.data)
 
     }
-    useEffect(() => {
-        console.log("check dataUpdate props", dataUpdate)
-        if (dataUpdate) {
-            setId(dataUpdate._id);
-            setFullName(dataUpdate.fullName);
-            setPhone(dataUpdate.phone);
-        }
-    }, [dataUpdate])
+
     const resetAnhCloseModal = () => {
         setIsModalUpdateOpen(false);
         setFullName("");
